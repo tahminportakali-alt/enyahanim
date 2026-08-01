@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Paneli - LUXURY BOX</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+
+    <!-- ===== LOGIN ===== -->
+    <div id="adminLoginPage" class="admin-login-page">
+        <div class="admin-login-box">
+            <div class="lock-icon"><i class="fas fa-user-shield"></i></div>
+            <h2>Admin Paneli</h2>
+            <p class="subtitle">LUXURY BOX yönetim paneline hoş geldiniz</p>
+            <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Kullanıcı Adı</label>
+                    <input type="text" id="adminUsername" placeholder="Kullanıcı adınızı girin" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Şifre</label>
+                    <input type="password" id="adminPassword" placeholder="Şifrenizi girin" required>
+                </div>
+                <div id="loginError" class="error"></div>
+                <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> Giriş Yap</button>
+            </form>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Siteye Dön</a>
+        </div>
+    </div>
+
+    <!-- ===== ADMIN PANEL ===== -->
+    <div id="adminPanelPage" style="display:none;">
+        <div class="admin-panel-container">
+            <div class="admin-panel-header">
+                <h1><i class="fas fa-cog"></i> Admin Paneli</h1>
+                <button class="logout-btn" onclick="handleAdminLogout()"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</button>
+            </div>
+
+            <div class="admin-card">
+                <h3><i class="fas fa-plus-circle"></i> Yeni Ürün Ekle</h3>
+                <form id="addProductForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Ürün Adı <span style="color:#d47b8e;">*</span></label>
+                            <input type="text" id="adminProductIsim" placeholder="Örn: Loro Piana Summer Walk" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Marka</label>
+                            <input type="text" id="adminProductMarka" placeholder="Örn: Loro Piana">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Fiyat (TL) <span style="color:#d47b8e;">*</span></label>
+                            <input type="number" id="adminProductFiyat" placeholder="Örn: 14900" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Resim URL <span style="color:#d47b8e;">*</span></label>
+                            <input type="text" id="adminProductResim" placeholder="css/foto/urun.jpg" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Kategori <span style="color:#d47b8e;">*</span></label>
+                            <select id="adminProductKategori" required style="width:100%; padding:12px 16px; background:#f9f9f9; border:1px solid rgba(26,26,26,0.1); border-radius:10px; color:#1A1A1A; font-size:14px;">
+                                <option value="anasayfa">🏠 Ana Sayfa</option>
+                                <option value="ayakkabilar">👟 Ayakkabılar (kadin.html)</option>
+                                <option value="gozluk-saat">🕶️ Gözlük & Saat (erkek.html)</option>
+                                <option value="cantalar">👜 Çantalar (cocuk.html)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-add-product" onclick="handleAddProduct(event)">
+                        <i class="fas fa-save"></i> Ürün Ekle
+                    </button>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h3><i class="fas fa-list"></i> Mevcut Ürünler</h3>
+                <div id="adminProductList" class="admin-product-grid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ SUPABASE + ADMIN JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/admin.js"></script>
+
+</body>
+</html>
